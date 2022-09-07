@@ -1,6 +1,11 @@
+import { Axios } from 'axios'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../_actions/user_action';
 
 function LoginPage() {
+
+  const dispatch = useDispatch();
 
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
@@ -15,10 +20,17 @@ function LoginPage() {
   }
 
   const onSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // 페이지가 리프레시되는 걸 막아줌
 
-    console.log('Email', Email)
-    console.log('Password', Password)
+
+    let body = {
+      emial: Email,
+      password: Password
+    }
+
+    dispatch(loginUser(body))
+
+    
   }
 
 
